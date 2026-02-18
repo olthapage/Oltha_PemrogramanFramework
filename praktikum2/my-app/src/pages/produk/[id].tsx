@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 
 const HalamanProduk = () => {
-    const Router = useRouter();
-    console.log(Router);
+    // const Router = useRouter();
+    // console.log(Router);
     const { query } = useRouter();
   return (
   <div>
