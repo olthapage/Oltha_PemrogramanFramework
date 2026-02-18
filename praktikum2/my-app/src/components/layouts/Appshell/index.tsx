@@ -11,10 +11,20 @@ const AppShell = (props: AppShellProps) => {
     <main>
       <Navbar />
 
-      {children}
+      <div style={{ padding: "20px" }}>
+        {children}
+      </div>
 
-      <footer>
-        footer
+      <footer
+        style={{
+          backgroundColor: "#333",
+          color: "white",
+          textAlign: "center",
+          padding: "15px",
+          marginTop: "20px"
+        }}
+      >
+        Oltha Rosyeda - Praktikum Next.js
       </footer>
     </main>
   );
