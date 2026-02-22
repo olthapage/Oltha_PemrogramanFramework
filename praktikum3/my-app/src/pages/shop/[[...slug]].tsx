@@ -1,16 +1,18 @@
 import { useRouter } from "next/router";
 
 const halamanToko = () => {
-  // const Router = useRouter();
-  // console.log(Router);
   const { query } = useRouter();
+  const slug = query.slug;
 
   return (
     <div>
       <h1>Halaman Toko</h1>
-      {/* <p>Toko: {`${query.slug && query.slug[0]+"-"+ query.slug[1]}`}</p> menggunakan backtick bukan petik satu */}
+     <p>
+        Kategori:{" "}
+        {Array.isArray(slug)? slug[0]: slug? slug: "Semua Kategori"}
+      </p>
       <p>
-        Toko: {Array.isArray(query.slug) ? query.slug.join("-") : query.slug}
+        Toko:{" "}{Array.isArray(slug)  ? slug.join("-")  : slug}
       </p>
     </div>
   );
