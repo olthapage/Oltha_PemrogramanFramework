@@ -32,9 +32,23 @@ const Kategori = () => {
       });
   }, []);
 
+  const fetchData = () => {
+    fetch("/api/produk")
+      .then((response) => response.json())
+      .then((responsedata) => {
+        setProducts(responsedata.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching produk:", error);
+      });
+  };
+
   return (
     <div>
       <h1>Daftar Produk</h1>
+      <button onClick={fetchData}>
+        Refresh Data
+      </button>
       {products.map((product: ProductType) => (
         <div key={product.id}>
           <h2>{product.name}</h2>
