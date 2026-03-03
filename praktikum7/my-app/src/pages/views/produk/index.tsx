@@ -29,6 +29,12 @@ const TampilanProduk = ({ products }: { products: ProductType[] }) => {
             </p>
           </div>
         ))}
+        <div className={styles.produk__content__skeleton}>
+          <div className={styles.produk__content__skeleton__image}></div>
+          <div className={styles.produk__content__skeleton__name}></div>
+          <div className={styles.produk__content__skeleton__category}></div>
+          <div className={styles.produk__content__skeleton__price}></div>
+        </div>
       </div>
     </div>
   );

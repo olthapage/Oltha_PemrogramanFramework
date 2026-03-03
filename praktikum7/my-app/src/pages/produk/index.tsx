@@ -1,43 +1,36 @@
-import styles from "./product.module.scss";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import TampilanProduk from "../views/produk";
 
-type ProductType = {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-};
+const kategori = () => {
+  // const [isLogin, setIsLogin] = useState(false);
+  // const { push } = useRouter();
+  const [products, setProducts] = useState([]);
+  
+  // console.log("products:", products);
+  // useEffect(() => {
+  //   if (!isLogin) {
+  //     push("/auth/login");
+  //   }
+  // }, []);
 
-const TampilanProduk = ({products = [],}: {products?: ProductType[];}) => {
+  useEffect(() => {
+    fetch("/api/produk")
+      .then((response) => response.json())
+      .then((responsedata) => {
+        setProducts(responsedata.data);
+        // console.log("Data produk:", responsedata.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching produk:", error);
+      });
+  }, []);
+
   return (
-    <div className={styles.produk}>
-      <h1 className={styles.produk__title}>Daftar Produk</h1>
-      <div className={styles.produk__content}>
-        {products.map((products: ProductType) => (
-          <div key={products.id} className={styles.produk__content__item}>
-            <div className={styles.produk__content__item__image}>
-              <img src={products.image} alt={products.name} width={200} />
-            </div>
-            <h4 className={styles.produk__content__item__name}>
-              {products.name}
-            </h4>
-            <p className={styles.produk__content__item__category}>
-              {products.category}
-            </p>
-            <p className={styles.produk__content__item__price}>
-              Rp {products.price.toLocaleString()}
-            </p>
-          </div>
-        ))}
-        <div className={styles.produk__content__skeleton}>
-          <div className={styles.produk__content__skeleton__image}></div>
-          <div className={styles.produk__content__skeleton__name}></div>
-          <div className={styles.produk__content__skeleton__category}></div>
-          <div className={styles.produk__content__skeleton__price}></div>
-        </div>
-      </div>
+    <div>
+      <TampilanProduk products={products} />
     </div>
   );
 };
 
-export default TampilanProduk;
+export default kategori;
