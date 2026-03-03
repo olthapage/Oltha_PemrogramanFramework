@@ -8,26 +8,19 @@ type ProductType = {
   category: string;
 };
 
-type Props = {
-  products: ProductType[];
-  isLoading: boolean;
-};
-
-const TampilanProduk = ({ products, isLoading }: Props) => {
+const TampilanProduk = ({ products }: { products: ProductType[] }) => {
   return (
     <div className={styles.produk}>
       <h1 className={styles.produk__title}>Daftar Produk</h1>
+
       <div className={styles.produk__content}>
 
-        {/* Skeleton Loading */}
-        {isLoading &&
+        {/* Jika data kosong tampilkan skeleton */}
+        {products.length === 0 &&
           Array(4)
             .fill(null)
             .map((_, index) => (
-              <div
-                key={index}
-                className={styles.produk__content__skeleton}
-              >
+              <div key={index} className={styles.produk__content__skeleton}>
                 <div className={styles.produk__content__skeleton__image}></div>
                 <div className={styles.produk__content__skeleton__name}></div>
                 <div className={styles.produk__content__skeleton__category}></div>
@@ -35,27 +28,26 @@ const TampilanProduk = ({ products, isLoading }: Props) => {
               </div>
             ))}
 
-        {/* Data Produk */}
-        {!isLoading &&
-          products.map((item) => (
-            <div
-              key={item.id}
-              className={`${styles.produk__content__item} ${styles.fadeIn}`}
-            >
-              <div className={styles.produk__content__item__image}>
-                <img src={item.image} alt={item.name} width={200} />
-              </div>
-              <h4 className={styles.produk__content__item__name}>
-                {item.name}
-              </h4>
-              <p className={styles.produk__content__item__category}>
-                {item.category}
-              </p>
-              <p className={styles.produk__content__item__price}>
-                Rp {item.price.toLocaleString()}
-              </p>
+        {/* Jika ada data tampilkan produk */}
+        {products.map((item: ProductType) => (
+          <div
+            key={item.id}
+            className={`${styles.produk__content__item} ${styles.fadeIn}`}
+          >
+            <div className={styles.produk__content__item__image}>
+              <img src={item.image} alt={item.name} width={200} />
             </div>
-          ))}
+            <h4 className={styles.produk__content__item__name}>
+              {item.name}
+            </h4>
+            <p className={styles.produk__content__item__category}>
+              {item.category}
+            </p>
+            <p className={styles.produk__content__item__price}>
+              Rp {item.price.toLocaleString()}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
