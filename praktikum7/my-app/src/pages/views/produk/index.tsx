@@ -8,49 +8,41 @@ type ProductType = {
   category: string;
 };
 
-const TampilanProduk = ({ products }: { products: ProductType[] }) => {
+const ProdukView = ({ products,isLoading,}: {  products: ProductType[];isLoading: boolean;}) => {
   return (
     <div className={styles.produk}>
       <h1 className={styles.produk__title}>Daftar Produk</h1>
-
       <div className={styles.produk__content}>
-
-        {/* Jika data kosong tampilkan skeleton */}
-        {products.length === 0 &&
-          Array(4)
-            .fill(null)
-            .map((_, index) => (
+        {isLoading
+          ? Array.from({ length: 4 }).map((_, index) => (
               <div key={index} className={styles.produk__content__skeleton}>
                 <div className={styles.produk__content__skeleton__image}></div>
                 <div className={styles.produk__content__skeleton__name}></div>
-                <div className={styles.produk__content__skeleton__category}></div>
+                <div
+                  className={styles.produk__content__skeleton__category}
+                ></div>
                 <div className={styles.produk__content__skeleton__price}></div>
               </div>
+            ))
+          : products.map((product: ProductType) => (
+              <div key={product.id} className={styles.produk__content__item}>
+                <div className={styles.produk__content__item__image}>
+                  <img src={product.image} alt={product.name} width={200} />
+                </div>
+                <h2 className={styles.produk__content__item__name}>
+                  {product.name}
+                </h2>
+                <p className={styles.produk__content__item__category}>
+                  Kategori: {product.category}
+                </p>
+                <p className={styles.produk__content__item__price}>
+                  Rp {product.price.toLocaleString("id-ID")}
+                </p>
+              </div>
             ))}
-
-        {/* Jika ada data tampilkan produk */}
-        {products.map((item: ProductType) => (
-          <div
-            key={item.id}
-            className={`${styles.produk__content__item} ${styles.fadeIn}`}
-          >
-            <div className={styles.produk__content__item__image}>
-              <img src={item.image} alt={item.name} width={200} />
-            </div>
-            <h4 className={styles.produk__content__item__name}>
-              {item.name}
-            </h4>
-            <p className={styles.produk__content__item__category}>
-              {item.category}
-            </p>
-            <p className={styles.produk__content__item__price}>
-              Rp {item.price.toLocaleString()}
-            </p>
-          </div>
-        ))}
       </div>
     </div>
   );
 };
 
-export default TampilanProduk;
+export default ProdukView;
