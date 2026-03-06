@@ -1,8 +1,8 @@
-import ProdukView from "../views/produk";
+import ProdukView from "../../views/produk";
 import { use, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import fetcher from "../utils/swr/fetcher";
+import fetcher from "../../utils/swr/fetcher";
 
 const halamanProduk = () => {
   const [products, setProducts] = useState([]);
