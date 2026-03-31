@@ -1,39 +1,51 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-// import styles from './login.module.css';
-import styles from './login.module.scss';
+import styles from "./login.module.scss";
 
 const TampilanLogin = () => {
-    const {push} = useRouter();
+  const { push } = useRouter();
 
-    const handleLogin = () => {
-        // logic login disini
-        push('/produk');
-    }
-    return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-4">
-      
-      <h1 className="text-3xl font-bold text-blue-600">
-        Halaman Login
-      </h1>
+  const handleLogin = () => {
+    // simulasi login
+    push("/produk");
+  };
 
-      <button onClick={handleLogin}>
-        Login
-      </button>
+  return (
+    <div className={styles.login}>
+      <div className={styles.login__card}>
+        <h1 className={styles.login__title}>Login</h1>
 
-      <h2 className="text-red-600 border border-red-600 rounded-md px-3 py-1">
-        Belum punya akun
-      </h2>
+        <div className={styles.login__form}>
+          <input
+            type="email"
+            placeholder="Email"
+            className={styles.login__input}
+          />
 
-      <Link
-        href="/auth/register"
-        className="text-blue-500 hover:text-blue-700 underline"
-      >
-        Ke Halaman Register
-      </Link>
+          <input
+            type="password"
+            placeholder="Password"
+            className={styles.login__input}
+          />
 
+          <button
+            onClick={handleLogin}
+            className={styles.login__button}
+          >
+            Login
+          </button>
+        </div>
+
+        <p className={styles.login__text}>
+          Belum punya akun?
+        </p>
+
+        <Link href="/auth/register" className={styles.login__link}>
+          Ke Halaman Register
+        </Link>
+      </div>
     </div>
-    );
-}
+  );
+};
 
 export default TampilanLogin;
