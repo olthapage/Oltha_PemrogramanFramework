@@ -3,30 +3,24 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import fetcher from "../../utils/swr/fetcher";
+import HalamanProduk from "./[produk]";
 
-//const fetcher = (url: string) => fetch(url).then((res) => res.json());
-const halamanProduk = () => {
-  // const [isLogin, setIsLogin] = useState(false);
-  // const { push } = useRouter();
+// const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+const kategori = () => {
+  // const [isLogin, setIsLogin] = useState(true);
+  const { push } = useRouter();
   const [products, setProducts] = useState([]);
-  //console.log("Products:", products);
-  //UseEffect(() => {
-  //  if (!isLogin) {
-  //    push("/auth/login");
-  //  }
-  //}, []);
+  // console.log("products:", products); ...
 
   const { data, error, isLoading } = useSWR("/api/produk", fetcher);
-  //cek apakah data, eror, dan isLoading sudah benar
-  //console.log("Data:", data);
-  //console.log("Error:", error);
-  //console.log("IsLoading:", isLoading);
+  //cek apakah data, error, dan isLoading sudah benar...
 
   return (
     <div>
-      <ProdukView products={data?.data || []} isLoading={isLoading} />
+      <HalamanProduk product={isLoading ? [] : data.data} />
     </div>
   );
 };
 
-export default halamanProduk;
+export default kategori;
