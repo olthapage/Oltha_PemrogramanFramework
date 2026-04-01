@@ -15,7 +15,7 @@ export default function withAuth(
       });
 
       if (!token) {
-        const loginUrl = new URL("/", req.url);
+        const loginUrl = new URL("/auth/login", req.url);
         return NextResponse.redirect(loginUrl);
       }
     }
