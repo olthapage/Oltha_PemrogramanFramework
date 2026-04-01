@@ -1,18 +1,12 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-
-export function middleware(request: NextRequest) {
-  const isLogin = false;
-  if (isLogin) {
-    return NextResponse.next();
-  } else {
-    return NextResponse.redirect(new URL("/auth/login", request.url));
-  }
-
-  //return NextResponse.redirect(new URL("/", request.url));
-  //return NextResponse.next();
+import type { NextRequest, NextFetchEvent } from "next/server";
+import withAuth from "./Middleware/withAuth";
+function middleware(request: NextRequest, event: NextFetchEvent) {
+  return NextResponse.next();
 }
 
-export const config = {
-  matcher: ["/produk", "/about"],
+export default withAuth(middleware, ["/profile", "/produk", "/about"]);
+
+export const config = {  
+  matcher: ["/profile", "/produk", "/about"],
 };

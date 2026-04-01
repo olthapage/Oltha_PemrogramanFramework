@@ -3,7 +3,7 @@ import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from "next/
 
 export default function withAuth(
   middleware: NextMiddleware,
-  requireAuth: string[] = []
+  requireAuth: string[] = [],
 ) {
   return async (req: NextRequest, next: NextFetchEvent) => {
     const pathname = req.nextUrl.pathname;
@@ -19,7 +19,6 @@ export default function withAuth(
         return NextResponse.redirect(loginUrl);
       }
     }
-    
     return middleware(req, next);
-  };
+  }
 }
