@@ -9,12 +9,28 @@ const TampilanRegister = () => {
   const [error, setError] = useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setError("");
+    setIsLoading(true);
+
     event.preventDefault();
     const form = event.currentTarget;
     const formdata = new FormData(event.currentTarget);
     const email = formdata.get("email") as string;
     const fullName = formdata.get("Fullname") as string;
     const password = formdata.get("Password") as string;
+
+    if (!email) {
+      setError("Email wajib diisi");
+      setIsLoading(false);
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password minimal 6 karakter");
+      setIsLoading(false);
+      return;
+    }
+
     const response = await fetch("/api/register", {
       method: "POST",
       headers: {
@@ -33,22 +49,23 @@ const TampilanRegister = () => {
       setIsLoading(false);
       setError(
         response.status === 400
-          ? "User already exists"
+          ? "Email already exists"
           : "An error occurred. Please try again later."
       );
     }
   };
+
   return (
     <div className={style.register}>
+          {error && <p className={style.register__error}>{error}</p>}
       <h1 className={style.register__title}>Halaman Register</h1>
       <div className={style.register__form}>
-        <form action="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className={style.register__form__item}>
             <label
               htmlFor="email"
               className={style.register__form__item__label}
-            >
-              Email
+            > Email
             </label>
             <input
               type="email"
@@ -63,8 +80,7 @@ const TampilanRegister = () => {
             <label
               htmlFor="Fullname"
               className={style.register__form__item__label}
-            >
-              Fullname
+            > Fullname
             </label>
             <input
               type="text"
@@ -79,8 +95,7 @@ const TampilanRegister = () => {
             <label
               htmlFor="Password"
               className={style.register__form__item__label}
-            >
-              Password
+            >Password
             </label>
             <input
               type="password"
@@ -90,8 +105,9 @@ const TampilanRegister = () => {
               className={style.register__form__item__input}
             />
           </div>
-          <button type="submit" className={style.register__form__item__button}>
-            Register
+          <button type="submit" className={style.register__form__item__button}
+            disabled={isLoading}>
+            {isLoading ? "Loading..." : "Register"}
           </button>
         </form>
         <br />
