@@ -1,5 +1,6 @@
 import styles from "../../pages/produk/product.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 
 type ProductType = {
   id: string;
@@ -25,7 +26,7 @@ const ProdukView = ({products, isLoading = false,}: {products: ProductType[];isL
           : products.map((product: ProductType) => (
               <Link href={`/produk/${product.id}`}  key={product.id} className={styles.produk__content__item}>
                 <div className={styles.produk__content__item__image}>
-                  <img src={product.image} alt={product.name} width={200} />
+                  <Image src={product.image} alt={product.name} width={200} height={200} />
                   </div>
                 <h2 className={styles.produk__content__item__name}>{product.name} </h2>
                 <p className={styles.produk__content__item__category}> Kategori: {product.category}</p>
