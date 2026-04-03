@@ -40,11 +40,10 @@ const TampilanLogin = () => {
     }
   };
 
-  // ... sisa kode komponen (return JSX) biasanya ada di bawah sini
-
   return (
     <div className={style.login}>
-          {error && <p className={style.login__error}>{error}</p>}
+      {error && <p className={style.login__error}>{error}</p>}
+
       <h1 className={style.login__title}>Halaman login</h1>
       <div className={style.login__form}>
         <form onSubmit={handleSubmit}>
@@ -52,7 +51,8 @@ const TampilanLogin = () => {
             <label
               htmlFor="email"
               className={style.login__form__item__label}
-            > Email
+            >
+              Email
             </label>
             <input
               type="email"
@@ -66,7 +66,8 @@ const TampilanLogin = () => {
             <label
               htmlFor="password"
               className={style.login__form__item__label}
-            >Password
+            >
+              Password
             </label>
             <input
               type="password"
@@ -76,14 +77,29 @@ const TampilanLogin = () => {
               className={style.login__form__item__input}
             />
           </div>
-          <button type="submit" className={style.login__form__item__button}
-            disabled={isLoading}>
+
+          <button
+            type="submit"
+            className={style.login__form__item__button}
+            disabled={isLoading}
+          >
             {isLoading ? "Loading..." : "login"}
+          </button>
+          <br /><br />
+          <button
+            onClick={() =>
+              signIn("google", { callbackUrl, redirect: false })
+            }
+            className={style.login__form__item__button}
+            disabled={isLoading}
+          >
+            {isLoading ? "Loading..." : "sign in with google"}
           </button>
         </form>
         <br />
         <p className={style.login__form__item__text}>
-          Sudah punya akun? <Link href="/auth/register">Ke Halaman Register</Link>
+          Sudah punya akun?{" "}
+          <Link href="/auth/register">Ke Halaman Register</Link>
         </p>
       </div>
     </div>
