@@ -5,12 +5,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "**.bing.net",
+      },
+      {
+        protocol: "https",
         hostname: "assets.adidas.com",
-        port: "",
-        pathname: "/**",
       },
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
