@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { retrieveProducts, retrieveDataByID } from "../../utils/db/servicefirebase";
+import { getData, retrieveDataByID } from "../../utils/db/servicefirebase";
 
 type Data = {
   status: boolean;
@@ -17,7 +17,7 @@ export default async function handler(
     res.status(200).json({ status: true, status_code: 200, data: data });
     return;
   } else {
-    const data = await retrieveProducts("products");
+    const data = await getData("products");
     res.status(200).json({ status: true, status_code: 200, data: data });
   };
 }
