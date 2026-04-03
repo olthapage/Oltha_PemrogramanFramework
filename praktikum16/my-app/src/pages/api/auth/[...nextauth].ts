@@ -2,6 +2,7 @@ import { signIn } from "@/utils/db/servicefirebase";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -40,9 +41,12 @@ export const authOptions: NextAuthOptions = {
         return null;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
   ],
 
-  // TAMBAHAN SESUAI PERINTAH DI GAMBAR
   callbacks: {
     async jwt({ token, account, profile, user }: any) {
       if (account?.provider === "credentials" && user) {
@@ -50,8 +54,19 @@ export const authOptions: NextAuthOptions = {
         token.fullname = user.fullname;
         token.role = user.role;
       }
-
-      // console.log("jwt callback", { token, account, profile, user })
+      if (account?.provider === "google") {
+  const data = {
+    fullname: user.name,
+    email: user.email,
+    image: user.image,
+    type: account.provider,
+  };
+  // console.log("Google login data", { data });
+  token.fullname = data.fullname;
+  token.email = data.email;
+  token.image = data.image;
+  token.type = data.type;
+}     
       return token;
     },
 
@@ -64,13 +79,23 @@ export const authOptions: NextAuthOptions = {
         session.user.fullname = token.fullname;
       }
 
+      if (token.image) {
+  session.user.image = token.image;
+}
+
       if (token.role) {
         session.user.role = token.role;
       }
 
-      // console.log("session callback", { session, token })
+      if (token.type) {
+  session.user.type = token.type;
+}
       return session;
     },
+  },
+
+  pages: {
+    signIn: "/auth/login",
   },
 };
 
