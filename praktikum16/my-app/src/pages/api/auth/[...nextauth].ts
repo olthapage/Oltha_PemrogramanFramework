@@ -1,4 +1,4 @@
-import { signIn } from "@/utils/db/servicefirebase";
+import { signIn, signInWithGoogle } from "@/utils/db/servicefirebase";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
@@ -8,7 +8,9 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+
   secret: process.env.NEXTAUTH_SECRET,
+
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -17,6 +19,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
@@ -25,7 +28,7 @@ export const authOptions: NextAuthOptions = {
         if (user) {
           const isPasswordValid = await bcrypt.compare(
             credentials.password,
-            user.password,
+            user.password
           );
 
           if (isPasswordValid) {
@@ -38,9 +41,11 @@ export const authOptions: NextAuthOptions = {
             };
           }
         }
+
         return null;
       },
     }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
@@ -54,19 +59,27 @@ export const authOptions: NextAuthOptions = {
         token.fullname = user.fullname;
         token.role = user.role;
       }
+
       if (account?.provider === "google") {
-  const data = {
-    fullname: user.name,
-    email: user.email,
-    image: user.image,
-    type: account.provider,
-  };
-  // console.log("Google login data", { data });
-  token.fullname = data.fullname;
-  token.email = data.email;
-  token.image = data.image;
-  token.type = data.type;
-}     
+        const data = {
+          fullname: user.name,
+          email: user.email,
+          image: user.image,
+          type: account.provider,
+        };
+
+        await signInWithGoogle(data, (result: any) => {
+          // Pastikan mengecek result.status sesuai dengan object yang dikirim
+          if (result.status) {
+            token.fullname = result.data.fullname;
+            token.email = result.data.email;
+            token.image = result.data.image;
+            token.type = result.data.type;
+            token.role = result.data.role;
+          }
+        });
+      }
+
       return token;
     },
 
@@ -80,16 +93,17 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (token.image) {
-  session.user.image = token.image;
-}
+        session.user.image = token.image;
+      }
 
       if (token.role) {
         session.user.role = token.role;
       }
 
       if (token.type) {
-  session.user.type = token.type;
-}
+        session.user.type = token.type;
+      }
+
       return session;
     },
   },
