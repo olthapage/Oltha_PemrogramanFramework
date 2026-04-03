@@ -1,6 +1,7 @@
-import styles from './navbar.module.css';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import styles from "./navbar.module.css";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Script from "next/dist/client/script";
 
 const Navbar = () => {
   const { data }: any = useSession();
@@ -9,9 +10,15 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbar}>
-      <div className={styles.navbar__brand}>
+      {/* <div className={styles.navbar__brand}>
         MyApp
-      </div>
+      </div> */}
+
+      <div className={styles.navbar__brand} id="title"></div>
+
+      <Script id="title-script" strategy="lazyOnload">
+        {`document.getElementById('title').innerHTML = 'MyApp';`}
+      </Script>
 
       <div className={styles.navbar__right}>
         {data ? (
@@ -28,6 +35,7 @@ const Navbar = () => {
                 />
               )}
             </div>
+
             <button
               className={`${styles.navbar__button} ${styles["navbar__button--danger"]}`}
               onClick={() => signOut()}
