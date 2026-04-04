@@ -5,86 +5,22 @@ exports[`About Page renders about page correctly 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        style="min-height: 100vh; display: flex; justify-content: center; align-items: center; background: rgb(245, 245, 245); font-family: Arial;"
-      >
-        <div
-          style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 350px;"
+      <div>
+        <h1
+          data-testid="title"
         >
-          <h1
-            style="margin-bottom: 10px;"
-          >
-            About Me
-          </h1>
-          <hr
-            style="margin-bottom: 20px;"
-          />
-          <p>
-            <strong>
-              Nama:
-            </strong>
-             Oltha Rosyeda Al'haq
-          </p>
-          <p>
-            <strong>
-              NIM:
-            </strong>
-             2341720145
-          </p>
-          <p>
-            <strong>
-              Program Studi:
-            </strong>
-             D4 Teknik Informatika
-          </p>
-          <p
-            style="margin-top: 20px; color: rgb(102, 102, 102); font-size: 14px;"
-          >
-            Mahasiswa yang sedang belajar Web Development menggunakan Next.js
-          </p>
-        </div>
+          About Page
+        </h1>
       </div>
     </div>
   </body>,
   "container": <div>
-    <div
-      style="min-height: 100vh; display: flex; justify-content: center; align-items: center; background: rgb(245, 245, 245); font-family: Arial;"
-    >
-      <div
-        style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 350px;"
+    <div>
+      <h1
+        data-testid="title"
       >
-        <h1
-          style="margin-bottom: 10px;"
-        >
-          About Me
-        </h1>
-        <hr
-          style="margin-bottom: 20px;"
-        />
-        <p>
-          <strong>
-            Nama:
-          </strong>
-           Oltha Rosyeda Al'haq
-        </p>
-        <p>
-          <strong>
-            NIM:
-          </strong>
-           2341720145
-        </p>
-        <p>
-          <strong>
-            Program Studi:
-          </strong>
-           D4 Teknik Informatika
-        </p>
-        <p
-          style="margin-top: 20px; color: rgb(102, 102, 102); font-size: 14px;"
-        >
-          Mahasiswa yang sedang belajar Web Development menggunakan Next.js
-        </p>
-      </div>
+        About Page
+      </h1>
     </div>
   </div>,
   "debug": [Function],
