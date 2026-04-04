@@ -40,7 +40,7 @@ const ProdukView = ({
                 <div className={styles.produk__content__skeleton__price}></div>
               </div>
             ))
-          : products.map((product: ProductType) => (
+          : products?.map((product: ProductType) => (
               <Link
                 href={`/produk/${product.id}`}
                 key={product.id}
