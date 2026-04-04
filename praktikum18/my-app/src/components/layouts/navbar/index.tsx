@@ -9,7 +9,7 @@ const Navbar = () => {
   // console.log("session", session)
 
   return (
-    <div className={styles.navbar}>
+    <nav className={styles.navbar} data-testid="navbar">
       {/* <div className={styles.navbar__brand}>
         MyApp
       </div> */}
@@ -26,7 +26,6 @@ const Navbar = () => {
             <div className={styles.navbar__user}>
               Welcome, {data.user?.fullname}
               {data.user.image && (
-                // <img
                 <Image
                   src={data.user.image}
                   alt={data.user.fullname}
@@ -53,7 +52,7 @@ const Navbar = () => {
           </button>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 
