@@ -26,7 +26,8 @@ const Navbar = () => {
             <div className={styles.navbar__user}>
               Welcome, {data.user?.fullname}
               {data.user.image && (
-                <img
+                // <img
+                <Image
                   src={data.user.image}
                   alt={data.user.fullname}
                   width={40}

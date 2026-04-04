@@ -11,6 +11,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "assets.adidas.com",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
     ],
   },
 };
