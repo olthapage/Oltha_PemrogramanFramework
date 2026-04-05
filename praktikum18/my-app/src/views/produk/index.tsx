@@ -25,7 +25,7 @@ const ProdukView = ({
 }) => {
   return (
     <div className={styles.produk}>
-      <h1 className={styles.produk__title}>Daftar Produk</h1>
+      <h1 data-testid="title" className={styles.produk__title}>Daftar Produk</h1>
 
       <div className={styles.produk__content}>
         {isLoading
@@ -55,9 +55,9 @@ const ProdukView = ({
                   />
                 </div>
 
-                <h2 className={styles.produk__content__item__name}>
+                <h4 className={styles.produk__content__item__name}>
                   {product.name}
-                </h2>
+                </h4>
 
                 <p className={styles.produk__content__item__category}>
                   Kategori: {product.category}

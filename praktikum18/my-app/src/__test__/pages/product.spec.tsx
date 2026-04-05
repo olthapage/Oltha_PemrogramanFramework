@@ -41,4 +41,16 @@ describe("Product Page", () => {
       render(<TampilanProduk />);
       expect(screen.getByText("Daftar Produk")).toBeInTheDocument();
     });
+
+    it("renders title text with toBe", () => {
+      render(<TampilanProduk />);
+      expect(screen.getByText("Daftar Produk").textContent).toBe(
+        "Daftar Produk",
+      );
+    });
+
+    it("renders title with testId", () => {
+      render(<TampilanProduk />);
+      expect(screen.getByTestId("title")).toBeInTheDocument();
+    });
 });
