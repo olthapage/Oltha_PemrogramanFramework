@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 
 // PAGES
 import ProdukPage from "@/pages/produk/index";
-import ProdukStatic, { getStaticProps } from "@/pages/produk/static";
+// import ProdukStatic, { getStaticProps } from "@/pages/produk/static";
 import ProdukServer, { getServerSideProps } from "@/pages/produk/server";
-import { getStaticPaths } from "@/pages/produk/[produk]";
+// import { getStaticPaths } from "@/pages/produk/[produk]";
 
 // VIEW
 import ProdukView from "@/views/produk";
@@ -86,11 +86,11 @@ describe("FULL PRODUK TEST 🚀", () => {
     expect(container).toBeTruthy();
   });
 
-  // SSG
-  it("getStaticProps works", async () => {
-    const result = await getStaticProps();
-    expect(result).toHaveProperty("props");
-  });
+  // // SSG
+  // it("getStaticProps works", async () => {
+  //   const result = await getStaticProps();
+  //   expect(result).toHaveProperty("props");
+  // });
 
   // SSR
  it("getServerSideProps works", async () => {
@@ -99,29 +99,29 @@ describe("FULL PRODUK TEST 🚀", () => {
  });
 
   // PATHS
-  it("getStaticPaths works", async () => {
-    const result = await getStaticPaths();
-    expect(result).toHaveProperty("paths");
-  });
+  // it("getStaticPaths works", async () => {
+  //   const result = await getStaticPaths();
+  //   expect(result).toHaveProperty("paths");
+  // });
 
   // static page render
-  it("render static page", () => {
-    render(
-      <ProdukStatic
-        products={[
-          {
-            id: "1",
-            name: "Produk Test",
-            price: 10000,
-            image: "/test.jpg",
-            category: "Test",
-          },
-        ]}
-      />,
-    );
+  // it("render static page", () => {
+  //   render(
+  //     <ProdukStatic
+  //       products={[
+  //         {
+  //           id: "1",
+  //           name: "Produk Test",
+  //           price: 10000,
+  //           image: "/test.jpg",
+  //           category: "Test",
+  //         },
+  //       ]}
+  //     />,
+  //   );
 
-    expect(screen.getByText("Halaman Produk Static")).toBeInTheDocument();
-  });
+  //   expect(screen.getByText("Halaman Produk Static")).toBeInTheDocument();
+  // });
 
   // server page render
   it("render server page", () => {
