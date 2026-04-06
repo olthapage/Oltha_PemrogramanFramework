@@ -1,51 +1,43 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Navbar Component renders navbar correctly 1`] = `
+exports[`FULL PRODUK TEST 🚀 snapshot produk page 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <nav
-        class="navbar"
-        data-testid="navbar"
-      >
+      <div>
         <div
-          class="navbar__brand"
-          data-testid="title"
-          id="title"
-        />
-        <div
-          class="navbar__right"
+          class="produk"
         >
-          <button
-            class="navbar__button navbar__button--primary"
+          <h1
+            class="produk__title"
+            data-testid="title"
           >
-            Sign In
-          </button>
+            Daftar Produk
+          </h1>
+          <div
+            class="produk__content"
+          />
         </div>
-      </nav>
+      </div>
     </div>
   </body>,
   "container": <div>
-    <nav
-      class="navbar"
-      data-testid="navbar"
-    >
+    <div>
       <div
-        class="navbar__brand"
-        data-testid="title"
-        id="title"
-      />
-      <div
-        class="navbar__right"
+        class="produk"
       >
-        <button
-          class="navbar__button navbar__button--primary"
+        <h1
+          class="produk__title"
+          data-testid="title"
         >
-          Sign In
-        </button>
+          Daftar Produk
+        </h1>
+        <div
+          class="produk__content"
+        />
       </div>
-    </nav>
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

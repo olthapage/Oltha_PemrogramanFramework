@@ -6,3 +6,10 @@ export type ProductType = {
     category: string;
     
 };
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+  }
+}
+
+export {};
