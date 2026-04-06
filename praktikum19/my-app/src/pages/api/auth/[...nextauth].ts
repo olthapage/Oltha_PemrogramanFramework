@@ -33,7 +33,6 @@ export const authOptions: NextAuthOptions = {
           );
 
           if (isPasswordValid) {
-            // Pastikan mengembalikan object user yang bersih
             return {
               id: user.id,
               email: user.email,
@@ -48,13 +47,13 @@ export const authOptions: NextAuthOptions = {
     }),
 
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
 
     GithubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID || "",
-      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
 
@@ -75,7 +74,25 @@ export const authOptions: NextAuthOptions = {
         };
 
         await signInWithGoogle(data, (result: any) => {
-          // Pastikan mengecek result.status sesuai dengan object yang dikirim
+          if (result.status) {
+            token.fullname = result.data.fullname;
+            token.email = result.data.email;
+            token.image = result.data.image;
+            token.type = result.data.type;
+            token.role = result.data.role;
+          }
+        });
+      }
+
+      if (account?.provider === "github") {
+        const data = {
+          fullname: user.name,
+          email: user.email,
+          image: user.image,
+          type: account.provider,
+        };
+
+        await signInWithGoogle(data, (result: any) => {
           if (result.status) {
             token.fullname = result.data.fullname;
             token.email = result.data.email;
